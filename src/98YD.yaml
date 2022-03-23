@@ -1,14 +1,11 @@
-=== Spec Example 5.5. Comment Indicator
---- from: http://www.yaml.org/spec/1.2/spec.html#id2773032
---- tags: spec comment empty
-
---- in-yaml(<)
+---
+- name: Spec Example 5.5. Comment Indicator
+  from: http://www.yaml.org/spec/1.2/spec.html#id2773032
+  tags: spec comment empty
+  yaml: |
     # Comment only.
-
---- in-json
-
---- out-yaml
-
---- test-event
-+STR
--STR
+  tree: |
+    +STR
+    -STR
+  json: ''
+  norm: ''

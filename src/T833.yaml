@@ -1,17 +1,15 @@
-=== Flow mapping missing a separating comma
---- from: @perlpunk
---- tags: error flow mapping
-
---- in-yaml(<)
+---
+- name: Flow mapping missing a separating comma
+  from: '@perlpunk'
+  tags: error flow mapping
+  fail: true
+  yaml: |
     ---
     {
      foo: 1
      bar: 2 }
-
---- error
-
---- test-event
-+STR
-+DOC ---
-+MAP
-=VAL :foo
+  tree: |
+    +STR
+     +DOC ---
+      +MAP
+       =VAL :foo

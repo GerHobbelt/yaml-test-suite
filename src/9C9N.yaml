@@ -1,19 +1,17 @@
-=== Wrong indented flow sequence
---- from: @perlpunk
---- tags: error flow indent sequence
-
---- in-yaml(<)
+---
+- name: Wrong indented flow sequence
+  from: '@perlpunk'
+  tags: error flow indent sequence
+  fail: true
+  yaml: |
     ---
     flow: [a,
     b,
     c]
-
---- error
-
---- test-event
-+STR
-+DOC ---
-+MAP
-=VAL :flow
-+SEQ []
-=VAL :a
+  tree: |
+    +STR
+     +DOC ---
+      +MAP
+       =VAL :flow
+       +SEQ []
+        =VAL :a

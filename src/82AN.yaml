@@ -1,20 +1,17 @@
-=== Three dashes and content without space
---- from: @perlpunk
---- tags: scalar 1.3-err
-
---- in-yaml(<)
+---
+- name: Three dashes and content without space
+  from: '@perlpunk'
+  tags: scalar 1.3-err
+  yaml: |
     ---word1
     word2
-
---- in-json
-"---word1 word2"
-
---- out-yaml
-'---word1 word2'
-
---- test-event
-+STR
-+DOC
-=VAL :---word1 word2
--DOC
--STR
+  tree: |
+    +STR
+     +DOC
+      =VAL :---word1 word2
+     -DOC
+    -STR
+  json: |
+    "---word1 word2"
+  norm: |
+    '---word1 word2'

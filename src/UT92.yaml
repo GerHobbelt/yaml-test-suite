@@ -1,8 +1,8 @@
-=== Spec Example 9.4. Explicit Documents
---- from: http://www.yaml.org/spec/1.2/spec.html#id2801448
---- tags: flow spec header footer comment
-
---- in-yaml(<)
+---
+- name: Spec Example 9.4. Explicit Documents
+  from: http://www.yaml.org/spec/1.2/spec.html#id2801448
+  tags: flow spec header footer comment
+  yaml: |
     ---
     { matches
     % : 20 }
@@ -10,29 +10,26 @@
     ---
     # Empty
     ...
-
---- in-json
-{
-  "matches %": 20
-}
-null
-
---- out-yaml(<)
+  tree: |
+    +STR
+     +DOC ---
+      +MAP {}
+       =VAL :matches %
+       =VAL :20
+      -MAP
+     -DOC ...
+     +DOC ---
+      =VAL :
+     -DOC ...
+    -STR
+  json: |
+    {
+      "matches %": 20
+    }
+    null
+  norm: |
     ---
     matches %: 20
     ...
     ---
     ...
-
---- test-event
-+STR
-+DOC ---
-+MAP {}
-=VAL :matches %
-=VAL :20
--MAP
--DOC ...
-+DOC ---
-=VAL :
--DOC ...
--STR

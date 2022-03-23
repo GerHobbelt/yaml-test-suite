@@ -1,27 +1,25 @@
-=== Simple Mapping Indent
---- from: https://github.com/ingydotnet/yaml-pegex-pm/blob/master/test/indent.tml
---- tags: simple mapping indent
-
---- in-yaml
-foo:
-  bar: baz
-
---- in-json
-{
-  "foo": {
-    "bar": "baz"
-  }
-}
-
---- test-event
-+STR
-+DOC
-+MAP
-=VAL :foo
-+MAP
-=VAL :bar
-=VAL :baz
--MAP
--MAP
--DOC
--STR
+---
+- name: Simple Mapping Indent
+  from: https://github.com/ingydotnet/yaml-pegex-pm/blob/master/test/indent.tml
+  tags: simple mapping indent
+  yaml: |
+    foo:
+      bar: baz
+  tree: |
+    +STR
+     +DOC
+      +MAP
+       =VAL :foo
+       +MAP
+        =VAL :bar
+        =VAL :baz
+       -MAP
+      -MAP
+     -DOC
+    -STR
+  json: |
+    {
+      "foo": {
+        "bar": "baz"
+      }
+    }

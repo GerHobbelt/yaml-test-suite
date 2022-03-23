@@ -1,26 +1,23 @@
-=== Doublequoted scalar starting with a tab
---- from: @perlpunk
---- tags: double scalar
-
---- in-yaml(<)
+---
+- name: Doublequoted scalar starting with a tab
+  from: '@perlpunk'
+  tags: double scalar
+  yaml: |
     ---
     tab: "\tstring"
-
---- out-yaml(<)
+  tree: |
+    +STR
+     +DOC ---
+      +MAP
+       =VAL :tab
+       =VAL "\tstring
+      -MAP
+     -DOC
+    -STR
+  json: |
+    {
+      "tab": "\tstring"
+    }
+  norm: |
     ---
     tab: "\tstring"
-
---- in-json
-{
-  "tab": "\tstring"
-}
-
---- test-event
-+STR
-+DOC ---
-+MAP
-=VAL :tab
-=VAL "\tstring
--MAP
--DOC
--STR

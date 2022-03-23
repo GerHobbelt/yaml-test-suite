@@ -1,17 +1,15 @@
-=== Wrong indented multiline quoted scalar
---- from: @perlpunk
---- tags: double error indent
-
---- in-yaml(<)
+---
+- name: Wrong indented multiline quoted scalar
+  from: '@perlpunk'
+  tags: double error indent
+  fail: true
+  yaml: |
     ---
     quoted: "a
     b
     c"
-
---- error
-
---- test-event
-+STR
-+DOC ---
-+MAP
-=VAL :quoted
+  tree: |
+    +STR
+     +DOC ---
+      +MAP
+       =VAL :quoted

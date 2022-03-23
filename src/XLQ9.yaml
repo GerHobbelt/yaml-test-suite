@@ -1,22 +1,19 @@
-=== Multiline scalar that looks like a YAML directive
---- from: @perlpunk
---- tags: directive scalar
-
---- in-yaml(<)
+---
+- name: Multiline scalar that looks like a YAML directive
+  from: '@perlpunk'
+  tags: directive scalar
+  yaml: |
     ---
     scalar
     %YAML 1.2
-
---- in-json
-"scalar %YAML 1.2"
-
---- out-yaml(<)
+  tree: |
+    +STR
+     +DOC ---
+      =VAL :scalar %YAML 1.2
+     -DOC
+    -STR
+  json: |
+    "scalar %YAML 1.2"
+  norm: |
     --- scalar %YAML 1.2
     ...
-
---- test-event
-+STR
-+DOC ---
-=VAL :scalar %YAML 1.2
--DOC
--STR

@@ -1,18 +1,16 @@
-=== Missing document-end marker before directive
---- from: @perlpunk
---- tags: error directive footer
-
---- in-yaml(<)
+---
+- name: Missing document-end marker before directive
+  from: '@perlpunk'
+  tags: error directive footer
+  fail: true
+  yaml: |
     ---
     scalar1 # comment
     %YAML 1.2
     ---
     scalar2
-
---- error
-
---- test-event
-+STR
-+DOC ---
-=VAL :scalar1
--DOC
+  tree: |
+    +STR
+     +DOC ---
+      =VAL :scalar1
+     -DOC

@@ -1,29 +1,26 @@
-=== Aliases in Implicit Block Mapping
---- from: NimYAML tests
---- tags: mapping alias
-
---- in-yaml
-&a a: &b b
-*b : *a
-
---- in-json
-{
-  "a": "b",
-  "b": "a"
-}
-
---- out-yaml
-&a a: &b b
-*b : *a
-
---- test-event
-+STR
-+DOC
-+MAP
-=VAL &a :a
-=VAL &b :b
-=ALI *b
-=ALI *a
--MAP
--DOC
--STR
+---
+- name: Aliases in Implicit Block Mapping
+  from: NimYAML tests
+  tags: mapping alias
+  yaml: |
+    &a a: &b b
+    *b : *a
+  tree: |
+    +STR
+     +DOC
+      +MAP
+       =VAL &a :a
+       =VAL &b :b
+       =ALI *b
+       =ALI *a
+      -MAP
+     -DOC
+    -STR
+  json: |
+    {
+      "a": "b",
+      "b": "a"
+    }
+  norm: |
+    &a a: &b b
+    *b : *a

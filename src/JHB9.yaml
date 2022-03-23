@@ -1,8 +1,8 @@
-=== Spec Example 2.7. Two Documents in a Stream
---- from: http://www.yaml.org/spec/1.2/spec.html#id2760493
---- tags: spec header
-
---- in-yaml(<)
+---
+- name: Spec Example 2.7. Two Documents in a Stream
+  from: http://www.yaml.org/spec/1.2/spec.html#id2760493
+  tags: spec header
+  yaml: |
     # Ranking of 1998 home runs
     ---
     - Mark McGwire
@@ -13,19 +13,33 @@
     ---
     - Chicago Cubs
     - St Louis Cardinals
-
---- in-json
-[
-  "Mark McGwire",
-  "Sammy Sosa",
-  "Ken Griffey"
-]
-[
-  "Chicago Cubs",
-  "St Louis Cardinals"
-]
-
---- out-yaml(<)
+  tree: |
+    +STR
+     +DOC ---
+      +SEQ
+       =VAL :Mark McGwire
+       =VAL :Sammy Sosa
+       =VAL :Ken Griffey
+      -SEQ
+     -DOC
+     +DOC ---
+      +SEQ
+       =VAL :Chicago Cubs
+       =VAL :St Louis Cardinals
+      -SEQ
+     -DOC
+    -STR
+  json: |
+    [
+      "Mark McGwire",
+      "Sammy Sosa",
+      "Ken Griffey"
+    ]
+    [
+      "Chicago Cubs",
+      "St Louis Cardinals"
+    ]
+  norm: |
     ---
     - Mark McGwire
     - Sammy Sosa
@@ -33,20 +47,3 @@
     ---
     - Chicago Cubs
     - St Louis Cardinals
-
---- test-event
-+STR
-+DOC ---
-+SEQ
-=VAL :Mark McGwire
-=VAL :Sammy Sosa
-=VAL :Ken Griffey
--SEQ
--DOC
-+DOC ---
-+SEQ
-=VAL :Chicago Cubs
-=VAL :St Louis Cardinals
--SEQ
--DOC
--STR

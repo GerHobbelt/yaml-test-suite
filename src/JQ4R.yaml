@@ -1,39 +1,36 @@
-=== Spec Example 8.14. Block Sequence
---- from: http://www.yaml.org/spec/1.2/spec.html#id2797596
---- tags: mapping spec sequence
-
---- in-yaml
-block sequence:
-  - one
-  - two : three
-
---- in-json
-{
-  "block sequence": [
-    "one",
+---
+- name: Spec Example 8.14. Block Sequence
+  from: http://www.yaml.org/spec/1.2/spec.html#id2797596
+  tags: mapping spec sequence
+  yaml: |
+    block sequence:
+      - one
+      - two : three
+  tree: |
+    +STR
+     +DOC
+      +MAP
+       =VAL :block sequence
+       +SEQ
+        =VAL :one
+        +MAP
+         =VAL :two
+         =VAL :three
+        -MAP
+       -SEQ
+      -MAP
+     -DOC
+    -STR
+  json: |
     {
-      "two": "three"
+      "block sequence": [
+        "one",
+        {
+          "two": "three"
+        }
+      ]
     }
-  ]
-}
-
---- out-yaml
-block sequence:
-- one
-- two: three
-
---- test-event
-+STR
-+DOC
-+MAP
-=VAL :block sequence
-+SEQ
-=VAL :one
-+MAP
-=VAL :two
-=VAL :three
--MAP
--SEQ
--MAP
--DOC
--STR
+  norm: |
+    block sequence:
+    - one
+    - two: three

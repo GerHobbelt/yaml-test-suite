@@ -1,11 +1,9 @@
-=== Directive by itself with no document
---- from: @ingydotnet
---- tags: error directive
-
---- in-yaml(<)
+---
+- name: Directive by itself with no document
+  from: '@ingydotnet'
+  tags: error directive
+  fail: true
+  yaml: |
     %YAML 1.2
-
---- error
-
---- test-event
-+STR
+  tree: |
+    +STR

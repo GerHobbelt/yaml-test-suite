@@ -1,17 +1,15 @@
-=== Invalid mapping after sequence
---- from: @perlpunk
---- tags: error mapping sequence
-
---- in-yaml
-- item1
-- item2
-invalid: x
-
---- error
-
---- test-event
-+STR
-+DOC
-+SEQ
-=VAL :item1
-=VAL :item2
+---
+- name: Invalid mapping after sequence
+  from: '@perlpunk'
+  tags: error mapping sequence
+  fail: true
+  yaml: |
+    - item1
+    - item2
+    invalid: x
+  tree: |
+    +STR
+     +DOC
+      +SEQ
+       =VAL :item1
+       =VAL :item2

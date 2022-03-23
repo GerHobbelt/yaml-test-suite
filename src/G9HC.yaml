@@ -1,19 +1,16 @@
-=== Invalid anchor in zero indented sequence
---- from: @perlpunk
---- tags: anchor error sequence
-
---- in-yaml(<)
+---
+- name: Invalid anchor in zero indented sequence
+  from: '@perlpunk'
+  tags: anchor error sequence
+  fail: true
+  yaml: |
     ---
     seq:
     &anchor
     - a
     - b
-
-
---- error
-
---- test-event
-+STR
-+DOC ---
-+MAP
-=VAL :seq
+  tree: |
+    +STR
+     +DOC ---
+      +MAP
+       =VAL :seq

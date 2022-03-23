@@ -1,25 +1,22 @@
-=== Colon followed by comma
---- from: @perlpunk
---- tags: scalar
-
---- in-yaml(<)
+---
+- name: Colon followed by comma
+  from: '@perlpunk'
+  tags: scalar
+  yaml: |
     ---
     - :,
-
---- out-yaml(<)
+  tree: |
+    +STR
+     +DOC ---
+      +SEQ
+       =VAL ::,
+      -SEQ
+     -DOC
+    -STR
+  json: |
+    [
+      ":,"
+    ]
+  norm: |
     ---
     - :,
-
---- in-json
-[
-  ":,"
-]
-
---- test-event
-+STR
-+DOC ---
-+SEQ
-=VAL ::,
--SEQ
--DOC
--STR

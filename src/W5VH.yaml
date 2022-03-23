@@ -1,25 +1,23 @@
-=== Allowed characters in alias
---- from: @perlpunk
---- tags: alias 1.3-err
-
---- in-yaml
-a: &:@*!$"<foo>: scalar a
-b: *:@*!$"<foo>:
-
---- in-json
-{
-  "a": "scalar a",
-  "b": "scalar a"
-}
-
---- test-event
-+STR
-+DOC
-+MAP
-=VAL :a
-=VAL &:@*!$"<foo>: :scalar a
-=VAL :b
-=ALI *:@*!$"<foo>:
--MAP
--DOC
--STR
+---
+- name: Allowed characters in alias
+  from: '@perlpunk'
+  tags: alias 1.3-err
+  yaml: |
+    a: &:@*!$"<foo>: scalar a
+    b: *:@*!$"<foo>:
+  tree: |
+    +STR
+     +DOC
+      +MAP
+       =VAL :a
+       =VAL &:@*!$"<foo>: :scalar a
+       =VAL :b
+       =ALI *:@*!$"<foo>:
+      -MAP
+     -DOC
+    -STR
+  json: |
+    {
+      "a": "scalar a",
+      "b": "scalar a"
+    }

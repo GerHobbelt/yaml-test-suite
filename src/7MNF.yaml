@@ -1,20 +1,18 @@
-=== Missing colon
---- from: @perlpunk
---- tags: error mapping
-
---- in-yaml
-top1:
-  key1: val1
-top2
-
---- error
-
---- test-event
-+STR
-+DOC
-+MAP
-=VAL :top1
-+MAP
-=VAL :key1
-=VAL :val1
--MAP
+---
+- name: Missing colon
+  from: '@perlpunk'
+  tags: error mapping
+  fail: true
+  yaml: |
+    top1:
+      key1: val1
+    top2
+  tree: |
+    +STR
+     +DOC
+      +MAP
+       =VAL :top1
+       +MAP
+        =VAL :key1
+        =VAL :val1
+       -MAP

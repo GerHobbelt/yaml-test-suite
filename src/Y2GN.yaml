@@ -1,26 +1,23 @@
-=== Anchor with colon in the middle
---- from: @perlpunk
---- tags: anchor
-
---- in-yaml(<)
+---
+- name: Anchor with colon in the middle
+  from: '@perlpunk'
+  tags: anchor
+  yaml: |
     ---
     key: &an:chor value
-
---- out-yaml(<)
+  tree: |
+    +STR
+     +DOC ---
+      +MAP
+       =VAL :key
+       =VAL &an:chor :value
+      -MAP
+     -DOC
+    -STR
+  json: |
+    {
+      "key": "value"
+    }
+  norm: |
     ---
     key: &an:chor value
-
---- in-json
-{
-  "key": "value"
-}
-
---- test-event
-+STR
-+DOC ---
-+MAP
-=VAL :key
-=VAL &an:chor :value
--MAP
--DOC
--STR

@@ -1,24 +1,21 @@
-=== Escaped slash in double quotes
---- from: @perlpunk
---- tags: double
-
---- in-yaml
-escaped slash: "a\/b"
-
---- in-json
-{
-  "escaped slash": "a/b"
-}
-
---- out-yaml
-escaped slash: "a/b"
-
---- test-event
-+STR
-+DOC
-+MAP
-=VAL :escaped slash
-=VAL "a/b
--MAP
--DOC
--STR
+---
+- name: Escaped slash in double quotes
+  from: '@perlpunk'
+  tags: double
+  yaml: |
+    escaped slash: "a\/b"
+  tree: |
+    +STR
+     +DOC
+      +MAP
+       =VAL :escaped slash
+       =VAL "a/b
+      -MAP
+     -DOC
+    -STR
+  json: |
+    {
+      "escaped slash": "a/b"
+    }
+  norm: |
+    escaped slash: "a/b"

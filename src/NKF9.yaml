@@ -1,8 +1,8 @@
-=== Empty keys in block and flow mapping
---- from: @perlpunk
---- tags: empty-key mapping
-
---- in-yaml(<)
+---
+- name: Empty keys in block and flow mapping
+  from: '@perlpunk'
+  tags: empty-key mapping
+  yaml: |
     ---
     key: value
     : empty key
@@ -16,8 +16,38 @@
     ---
     # empty key and value
     { : }
-
---- emit-yaml(<)
+  tree: |
+    +STR
+     +DOC ---
+      +MAP
+       =VAL :key
+       =VAL :value
+       =VAL :
+       =VAL :empty key
+      -MAP
+     -DOC
+     +DOC ---
+      +MAP {}
+       =VAL :key
+       =VAL :value
+       =VAL :
+       =VAL :empty key
+      -MAP
+     -DOC
+     +DOC ---
+      +MAP
+       =VAL :
+       =VAL :
+      -MAP
+     -DOC
+     +DOC ---
+      +MAP {}
+       =VAL :
+       =VAL :
+      -MAP
+     -DOC
+    -STR
+  emit: |
     ---
     key: value
     : empty key
@@ -28,35 +58,3 @@
     :
     ---
     :
-
---- test-event
-+STR
-+DOC ---
-+MAP
-=VAL :key
-=VAL :value
-=VAL :
-=VAL :empty key
--MAP
--DOC
-+DOC ---
-+MAP {}
-=VAL :key
-=VAL :value
-=VAL :
-=VAL :empty key
--MAP
--DOC
-+DOC ---
-+MAP
-=VAL :
-=VAL :
--MAP
--DOC
-+DOC ---
-+MAP {}
-=VAL :
-=VAL :
--MAP
--DOC
--STR

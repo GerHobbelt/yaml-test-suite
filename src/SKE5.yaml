@@ -1,37 +1,34 @@
-=== Anchor before zero indented sequence
---- from: @perlpunk
---- tags: anchor indent sequence
-
---- in-yaml(<)
+---
+- name: Anchor before zero indented sequence
+  from: '@perlpunk'
+  tags: anchor indent sequence
+  yaml: |
     ---
     seq:
      &anchor
     - a
     - b
-
---- in-json
-{
-  "seq": [
-    "a",
-    "b"
-  ]
-}
-
---- out-yaml(<)
+  tree: |
+    +STR
+     +DOC ---
+      +MAP
+       =VAL :seq
+       +SEQ &anchor
+        =VAL :a
+        =VAL :b
+       -SEQ
+      -MAP
+     -DOC
+    -STR
+  json: |
+    {
+      "seq": [
+        "a",
+        "b"
+      ]
+    }
+  norm: |
     ---
     seq: &anchor
     - a
     - b
-
---- test-event
-+STR
-+DOC ---
-+MAP
-=VAL :seq
-+SEQ &anchor
-=VAL :a
-=VAL :b
--SEQ
--MAP
--DOC
--STR

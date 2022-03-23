@@ -1,20 +1,18 @@
-=== Invalid scalar at the end of sequence
---- from: @perlpunk
---- tags: error mapping sequence
-
---- in-yaml
-key:
- - bar
- - baz
- invalid
-
---- error
-
---- test-event
-+STR
-+DOC
-+MAP
-=VAL :key
-+SEQ
-=VAL :bar
-=VAL :baz
+---
+- name: Invalid scalar at the end of sequence
+  from: '@perlpunk'
+  tags: error mapping sequence
+  fail: true
+  yaml: |
+    key:
+     - bar
+     - baz
+     invalid
+  tree: |
+    +STR
+     +DOC
+      +MAP
+       =VAL :key
+       +SEQ
+        =VAL :bar
+        =VAL :baz

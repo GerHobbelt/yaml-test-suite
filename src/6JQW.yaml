@@ -1,24 +1,21 @@
-=== Spec Example 2.13. In literals, newlines are preserved
---- from: http://www.yaml.org/spec/1.2/spec.html#id2759963
---- tags: spec scalar literal comment
-
---- in-yaml(<)
+---
+- name: Spec Example 2.13. In literals, newlines are preserved
+  from: http://www.yaml.org/spec/1.2/spec.html#id2759963
+  tags: spec scalar literal comment
+  yaml: |
     # ASCII Art
     --- |
       \//||\/||
       // ||  ||__
-
---- in-json
-"\\//||\\/||\n// ||  ||__\n"
-
---- out-yaml(<)
+  tree: |
+    +STR
+     +DOC ---
+      =VAL |\\//||\\/||\n// ||  ||__\n
+     -DOC
+    -STR
+  json: |
+    "\\//||\\/||\n// ||  ||__\n"
+  norm: |
     --- |
       \//||\/||
       // ||  ||__
-
---- test-event
-+STR
-+DOC ---
-=VAL |\\//||\\/||\n// ||  ||__\n
--DOC
--STR

@@ -1,13 +1,11 @@
-=== Invalid tag
---- from: @perlpunk
---- tags: error tag
-
---- in-yaml(<)
+---
+- name: Invalid tag
+  from: '@perlpunk'
+  tags: error tag
+  fail: true
+  yaml: |
     ---
     !invalid{}tag scalar
-
---- error
-
---- test-event
-+STR
-+DOC ---
+  tree: |
+    +STR
+     +DOC ---

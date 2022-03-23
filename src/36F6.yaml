@@ -1,31 +1,28 @@
-=== Multiline plain scalar with empty line
---- from: @perlpunk
---- tags: mapping scalar
-
---- in-yaml(<)
+---
+- name: Multiline plain scalar with empty line
+  from: '@perlpunk'
+  tags: mapping scalar
+  yaml: |
     ---
     plain: a
      b
 
      c
-
---- in-json
-{
-  "plain": "a b\nc"
-}
-
---- out-yaml(<)
+  tree: |
+    +STR
+     +DOC ---
+      +MAP
+       =VAL :plain
+       =VAL :a b\nc
+      -MAP
+     -DOC
+    -STR
+  json: |
+    {
+      "plain": "a b\nc"
+    }
+  norm: |
     ---
     plain: 'a b
 
       c'
-
---- test-event
-+STR
-+DOC ---
-+MAP
-=VAL :plain
-=VAL :a b\nc
--MAP
--DOC
--STR

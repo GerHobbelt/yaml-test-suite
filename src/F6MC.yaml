@@ -1,8 +1,8 @@
-=== More indented lines at the beginning of folded block scalars
---- from: @perlpunk
---- tags: folded indent
-
---- in-yaml(<)
+---
+- name: More indented lines at the beginning of folded block scalars
+  from: '@perlpunk'
+  tags: folded indent
+  yaml: |
     ---
     a: >2
        more indented
@@ -12,8 +12,23 @@
 
        more indented
       regular
-
---- emit-yaml(<)
+  tree: |
+    +STR
+     +DOC ---
+      +MAP
+       =VAL :a
+       =VAL > more indented\nregular\n
+       =VAL :b
+       =VAL >\n\n more indented\nregular\n
+      -MAP
+     -DOC
+    -STR
+  json: |
+    {
+      "a": " more indented\nregular\n",
+      "b": "\n\n more indented\nregular\n"
+    }
+  emit: |
     ---
     a: >2
        more indented
@@ -23,21 +38,3 @@
 
        more indented
       regular
-
---- in-json
-{
-  "a": " more indented\nregular\n",
-  "b": "\n\n more indented\nregular\n"
-}
-
---- test-event
-+STR
-+DOC ---
-+MAP
-=VAL :a
-=VAL > more indented\nregular\n
-=VAL :b
-=VAL >\n\n more indented\nregular\n
--MAP
--DOC
--STR

@@ -1,16 +1,14 @@
-=== Invalid document markers in flow style
---- from: NimYAML tests
---- tags: flow edge header footer error
-
---- in-yaml(<)
+---
+- name: Invalid document markers in flow style
+  from: NimYAML tests
+  tags: flow edge header footer error
+  fail: true
+  yaml: |
     [
     --- ,
     ...
     ]
-
---- error
-
---- test-event
-+STR
-+DOC
-+SEQ []
+  tree: |
+    +STR
+     +DOC
+      +SEQ []

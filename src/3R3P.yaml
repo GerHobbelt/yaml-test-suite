@@ -1,25 +1,22 @@
-=== Single block sequence with anchor
---- from: @perlpunk
---- tags: anchor sequence
-
---- in-yaml
-&sequence
-- a
-
---- out-yaml
-&sequence
-- a
-
---- in-json
-[
-  "a"
-]
-
---- test-event
-+STR
-+DOC
-+SEQ &sequence
-=VAL :a
--SEQ
--DOC
--STR
+---
+- name: Single block sequence with anchor
+  from: '@perlpunk'
+  tags: anchor sequence
+  yaml: |
+    &sequence
+    - a
+  tree: |
+    +STR
+     +DOC
+      +SEQ &sequence
+       =VAL :a
+      -SEQ
+     -DOC
+    -STR
+  json: |
+    [
+      "a"
+    ]
+  norm: |
+    &sequence
+    - a

@@ -1,14 +1,11 @@
-=== Document-end marker
---- from: @perlpunk
---- tags: footer
-
---- in-yaml(<)
+---
+- name: Document-end marker
+  from: '@perlpunk'
+  tags: footer
+  yaml: |
     ...
-
---- out-yaml(<)
-
---- in-json
-
---- test-event
-+STR
--STR
+  tree: |
+    +STR
+    -STR
+  json: ''
+  norm: ''

@@ -1,33 +1,30 @@
-=== Document start on last line
---- from: @perlpunk
---- tags: header
-
---- in-yaml(<)
+---
+- name: Document start on last line
+  from: '@perlpunk'
+  tags: header
+  yaml: |
     ---
     a: b
     ---
-
---- in-json
-{
-  "a": "b"
-}
-null
-
---- out-yaml(<)
+  tree: |
+    +STR
+     +DOC ---
+      +MAP
+       =VAL :a
+       =VAL :b
+      -MAP
+     -DOC
+     +DOC ---
+      =VAL :
+     -DOC
+    -STR
+  json: |
+    {
+      "a": "b"
+    }
+    null
+  norm: |
     ---
     a: b
     ---
     ...
-
---- test-event
-+STR
-+DOC ---
-+MAP
-=VAL :a
-=VAL :b
--MAP
--DOC
-+DOC ---
-=VAL :
--DOC
--STR

@@ -1,11 +1,9 @@
-=== Anchor before sequence entry on same line
---- from: @perlpunk
---- tags: anchor error sequence
-
---- in-yaml
-&anchor - sequence entry
-
---- error
-
---- test-event
-+STR
+---
+- name: Anchor before sequence entry on same line
+  from: '@perlpunk'
+  tags: anchor error sequence
+  fail: true
+  yaml: |
+    &anchor - sequence entry
+  tree: |
+    +STR

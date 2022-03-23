@@ -1,13 +1,14 @@
-=== Need document footer before directives
---- from: @ingydotnet
---- tags: directive error footer tag unknown-tag
---- error
---- in-yaml(<)
+---
+- name: Need document footer before directives
+  from: '@ingydotnet'
+  tags: directive error footer tag unknown-tag
+  fail: true
+  yaml: |
     !foo "bar"
     %TAG ! tag:example.com,2000:app/
     ---
     !foo "bar"
---- test-event
-+STR
-+DOC
-=VAL <!foo> "bar
+  tree: |
+    +STR
+     +DOC
+      =VAL <!foo> "bar

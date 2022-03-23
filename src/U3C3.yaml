@@ -1,21 +1,18 @@
-=== Spec Example 6.16. “TAG” directive
---- from: http://www.yaml.org/spec/1.2/spec.html#id2782252
---- tags: spec header tag
-
---- in-yaml(<)
+---
+- name: Spec Example 6.16. “TAG” directive
+  from: http://www.yaml.org/spec/1.2/spec.html#id2782252
+  tags: spec header tag
+  yaml: |
     %TAG !yaml! tag:yaml.org,2002:
     ---
     !yaml!str "foo"
-
---- in-json
-"foo"
-
---- out-yaml(<)
+  tree: |
+    +STR
+     +DOC ---
+      =VAL <tag:yaml.org,2002:str> "foo
+     -DOC
+    -STR
+  json: |
+    "foo"
+  norm: |
     --- !!str "foo"
-
---- test-event
-+STR
-+DOC ---
-=VAL <tag:yaml.org,2002:str> "foo
--DOC
--STR

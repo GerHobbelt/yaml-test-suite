@@ -1,31 +1,28 @@
-=== Empty Lines Between Mapping Elements
---- from: NimYAML tests
---- tags: whitespace mapping
+---
+- name: Empty Lines Between Mapping Elements
+  from: NimYAML tests
+  tags: whitespace mapping
+  yaml: |
+    one: 2
 
---- in-yaml
-one: 2
 
-
-three: 4
-
---- in-json
-{
-  "one": 2,
-  "three": 4
-}
-
---- out-yaml
-one: 2
-three: 4
-
---- test-event
-+STR
-+DOC
-+MAP
-=VAL :one
-=VAL :2
-=VAL :three
-=VAL :4
--MAP
--DOC
--STR
+    three: 4
+  tree: |
+    +STR
+     +DOC
+      +MAP
+       =VAL :one
+       =VAL :2
+       =VAL :three
+       =VAL :4
+      -MAP
+     -DOC
+    -STR
+  json: |
+    {
+      "one": 2,
+      "three": 4
+    }
+  norm: |
+    one: 2
+    three: 4

@@ -1,18 +1,16 @@
-=== Literal block scalar with more spaces in first line
---- from: @perlpunk
---- tags: error literal whitespace
-
---- in-yaml(<)
+---
+- name: Literal block scalar with more spaces in first line
+  from: '@perlpunk'
+  tags: error literal whitespace
+  fail: true
+  yaml: |
     ---
     block scalar: |
     <SPC><SPC><SPC><SPC><SPC>
       more spaces at the beginning
       are invalid
-
---- error
-
---- test-event
-+STR
-+DOC ---
-+MAP
-=VAL :block scalar
+  tree: |
+    +STR
+     +DOC ---
+      +MAP
+       =VAL :block scalar

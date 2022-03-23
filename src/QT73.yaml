@@ -1,15 +1,12 @@
-=== Comment and document-end marker
---- from: @perlpunk
---- tags: comment footer
-
---- in-yaml(<)
+---
+- name: Comment and document-end marker
+  from: '@perlpunk'
+  tags: comment footer
+  yaml: |
     # comment
     ...
-
---- out-yaml(<)
-
---- in-json
-
---- test-event
-+STR
--STR
+  tree: |
+    +STR
+    -STR
+  json: ''
+  norm: ''

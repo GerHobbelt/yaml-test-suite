@@ -1,24 +1,21 @@
-=== Backslashes in singlequotes
---- from: @perlpunk
---- tags: scalar single
-
---- in-yaml
-'foo: bar\': baz'
-
---- in-json
-{
-  "foo: bar\\": "baz'"
-}
-
---- out-yaml
-'foo: bar\': baz'
-
---- test-event
-+STR
-+DOC
-+MAP
-=VAL 'foo: bar\\
-=VAL :baz'
--MAP
--DOC
--STR
+---
+- name: Backslashes in singlequotes
+  from: '@perlpunk'
+  tags: scalar single
+  yaml: |
+    'foo: bar\': baz'
+  tree: |
+    +STR
+     +DOC
+      +MAP
+       =VAL 'foo: bar\\
+       =VAL :baz'
+      -MAP
+     -DOC
+    -STR
+  json: |
+    {
+      "foo: bar\\": "baz'"
+    }
+  norm: |
+    'foo: bar\': baz'

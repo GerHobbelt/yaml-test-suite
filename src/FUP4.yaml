@@ -1,33 +1,30 @@
-=== Flow Sequence in Flow Sequence
---- from: NimYAML tests
---- tags: sequence flow
-
---- in-yaml
-[a, [b, c]]
-
---- in-json
-[
-  "a",
-  [
-    "b",
-    "c"
-  ]
-]
-
---- out-yaml
-- a
-- - b
-  - c
-
---- test-event
-+STR
-+DOC
-+SEQ []
-=VAL :a
-+SEQ []
-=VAL :b
-=VAL :c
--SEQ
--SEQ
--DOC
--STR
+---
+- name: Flow Sequence in Flow Sequence
+  from: NimYAML tests
+  tags: sequence flow
+  yaml: |
+    [a, [b, c]]
+  tree: |
+    +STR
+     +DOC
+      +SEQ []
+       =VAL :a
+       +SEQ []
+        =VAL :b
+        =VAL :c
+       -SEQ
+      -SEQ
+     -DOC
+    -STR
+  json: |
+    [
+      "a",
+      [
+        "b",
+        "c"
+      ]
+    ]
+  norm: |
+    - a
+    - - b
+      - c

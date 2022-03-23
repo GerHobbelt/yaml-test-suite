@@ -1,29 +1,26 @@
-=== Flow Sequence
---- from: https://github.com/ingydotnet/yaml-pegex-pm/blob/master/test/sequence.tml
---- tags: flow sequence
-
---- in-yaml
-[foo, bar, 42]
-
---- in-json
-[
-  "foo",
-  "bar",
-  42
-]
-
---- out-yaml
-- foo
-- bar
-- 42
-
---- test-event
-+STR
-+DOC
-+SEQ []
-=VAL :foo
-=VAL :bar
-=VAL :42
--SEQ
--DOC
--STR
+---
+- name: Flow Sequence
+  from: https://github.com/ingydotnet/yaml-pegex-pm/blob/master/test/sequence.tml
+  tags: flow sequence
+  yaml: |
+    [foo, bar, 42]
+  tree: |
+    +STR
+     +DOC
+      +SEQ []
+       =VAL :foo
+       =VAL :bar
+       =VAL :42
+      -SEQ
+     -DOC
+    -STR
+  json: |
+    [
+      "foo",
+      "bar",
+      42
+    ]
+  norm: |
+    - foo
+    - bar
+    - 42

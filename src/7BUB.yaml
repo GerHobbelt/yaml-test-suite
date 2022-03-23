@@ -1,8 +1,8 @@
-=== Spec Example 2.10. Node for “Sammy Sosa” appears twice in this document
---- from: http://www.yaml.org/spec/1.2/spec.html#id2760658
---- tags: mapping sequence spec alias
-
---- in-yaml(<)
+---
+- name: Spec Example 2.10. Node for “Sammy Sosa” appears twice in this document
+  from: http://www.yaml.org/spec/1.2/spec.html#id2760658
+  tags: mapping sequence spec alias
+  yaml: |
     ---
     hr:
       - Mark McGwire
@@ -11,20 +11,35 @@
     rbi:
       - *SS # Subsequent occurrence
       - Ken Griffey
-
---- in-json
-{
-  "hr": [
-    "Mark McGwire",
-    "Sammy Sosa"
-  ],
-  "rbi": [
-    "Sammy Sosa",
-    "Ken Griffey"
-  ]
-}
-
---- out-yaml(<)
+  tree: |
+    +STR
+     +DOC ---
+      +MAP
+       =VAL :hr
+       +SEQ
+        =VAL :Mark McGwire
+        =VAL &SS :Sammy Sosa
+       -SEQ
+       =VAL :rbi
+       +SEQ
+        =ALI *SS
+        =VAL :Ken Griffey
+       -SEQ
+      -MAP
+     -DOC
+    -STR
+  json: |
+    {
+      "hr": [
+        "Mark McGwire",
+        "Sammy Sosa"
+      ],
+      "rbi": [
+        "Sammy Sosa",
+        "Ken Griffey"
+      ]
+    }
+  norm: |
     ---
     hr:
     - Mark McGwire
@@ -32,21 +47,3 @@
     rbi:
     - *SS
     - Ken Griffey
-
---- test-event
-+STR
-+DOC ---
-+MAP
-=VAL :hr
-+SEQ
-=VAL :Mark McGwire
-=VAL &SS :Sammy Sosa
--SEQ
-=VAL :rbi
-+SEQ
-=ALI *SS
-=VAL :Ken Griffey
--SEQ
--MAP
--DOC
--STR
