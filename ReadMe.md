@@ -22,7 +22,7 @@ The types of data include:
 * etc
 
 To get a quick overview of the tests you can have a look at the [YAML Test
-Matrix](http://matrix.yaml.io/), made from
+Matrix](http://matrix.yaml.info/), made from
 <https://github.com/perlpunk/yaml-test-matrix>.
 
 The tests are available in 2 forms.
@@ -48,7 +48,7 @@ presence of certain characters that would be otherwise hard to read.
   * `»`
 * `↵` us used to show trailing newline characters
 * `∎` is used at the end when there is no final newline character
-* `↓` indicates a carriage return character
+* `←` indicates a carriage return character
 * `⇔` indicates a byte order mark (BOM) character
 
 Also these are used in test event output:
@@ -56,16 +56,67 @@ Also these are used in test event output:
 * `<SPC>` for a space character
 * `<TAB>` for a tab character
 
-## Updating Things
+## The `data` branch files
 
-When test files change you need to update various artifacts.
-To do this, run the following commands:
+The YAML test files in the `src/` dir are turned into data files in the `data`
+branch.
+The `make data-update` command generates the `data` branch files under the
+`./data/` directory.
+For instance, a file `src/AB3D.yaml` will generate a `data/AB3D/` directory.
 
-```
-make data-update    # Update data branch worktree
-```
+A YAML test file can have 1 or more tests.
+Originally each file had one test, and all the data files were under
+`data/AB3D/`.
+If a YAML test file has more than one test, subdirectories are created:
+`data/AB3D/00/`, `data/AB3D/01/`, `data/AB3D/02/`, etc.
 
-You will need Bash, NodeJS and Perl for these things.
+The test files are:
+
+* `===` -- The name/label of the test
+* `in.yaml` -- The YAML input to be parsed or loaded
+* `test.event` -- The event DSL produced by the parser test program
+* `in.json` -- The JSON value that shoiuld load the same as `in.yaml`
+* `out.yaml` -- The most normal output a dumper would produce
+* `error` -- This file indicates the YAML should fail to parse
+* `emit.yaml` -- Output an emitter would produce
+
+## Makefile Targets
+
+The Makefile has a number of targets for automating the process of adding new
+tests and also preprocessing them into the `data` branch.
+
+* `make data`
+
+  Create a `data` worktree subdirectory with all the tests as data files.
+
+* `make data-update`
+
+  Update the `data` brnach directory with the latest info in the `src`
+  directory.
+
+* `make export`
+
+  Creates an `export.tsv` file with all the data from the `src` test files.
+  This tsv data can be copied into a google spreadsheet.
+  The [YAML parser playground](https://play.yaml.io/main/parser) has a button
+  to copy a test to the same tsv form.
+
+* `make import`
+
+  Make a directory called `new` from a file named `import.tsv`.
+  The `import.tsv` file should have data copied from a google spreadsheet.
+
+* `make add-new`
+
+  Copy the new tests under `new/` into `src/` to make a PR for new tests.
+
+* `make testml`
+
+  Generate `.tml` files under a `testml/` directory for all the suite tests.
+
+* `make clean`
+
+  Remove generated files and directories.
 
 ## Libaries using this test suite
 

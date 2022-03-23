@@ -1,0 +1,25 @@
+---
+- skip: true
+  name: Trailing whitespace in streams
+  from: '@ingydotnet'
+  tags: literal
+  yaml: |
+    - |+
+    ↵
+    ↵
+  tree: |
+    +STR
+     +DOC
+      +SEQ
+       =VAL |
+      -SEQ
+     -DOC
+    -STR
+
+- yaml: |
+    - |+
+    ␣␣␣
+
+- yaml: |
+    - |+
+    ␣␣␣∎
