@@ -43,6 +43,8 @@ sub run {
         $file =~ m{^.*/(.*)\.yaml$} or die;
         $self->{id} = $1;
 
+        # next unless $1 eq '6BFJ';
+
         my $data = $ypp->load_file($file);
 
         if ($data->[0]{skip} and $self->skip) {
@@ -61,13 +63,22 @@ sub run {
             $self->{make}++;
             $self->{data} = $test;
             $self->{num} = sprintf "%0${l}d", $i++;
-            $self->{ID} = $multi
+            my $ID = $self->{ID} = $multi
                 ? "$self->{id}-$self->{num}"
                 : $self->{id};
 
+            die "Can't change test name in '$ID'"
+                if $test->{name} and $cache->{name};
+
             $test->{name} ||= $cache->{name} or die;
+            $test->{tags} ||= $cache->{tags} || '';
             $test->{yaml} ||= $cache->{yaml} or die;
             $test->{fail} = exists $test->{fail} ? 1 : 0;
+
+            $self->{slug} = lc $test->{name};
+            $self->{slug} =~ s/[^\w]+/-/g;
+            $self->{slug} =~ s/^-//;
+            $self->{slug} =~ s/-$//;
 
             for my $key (qw< tree json dump emit toke >) {
                 if (
