@@ -52,7 +52,6 @@ BEGIN {
         chomp $out;
         $container_id = $out;
         $SIG{INT} = \&kill_docker_container;
-        system("docker exec $container_id apk add bash 2>&1 >/dev/null") == 0 or die;
     }
 }
 
@@ -69,6 +68,7 @@ my @test_runners = (qw<
     yaml-test-parse-npmyaml
     yaml-test-parse-ppyaml
     yaml-test-parse-pyyaml
+    yaml-test-parse-rapid
     yaml-test-parse-ruamel
     yaml-test-parse-rustyaml
     yaml-test-parse-snake

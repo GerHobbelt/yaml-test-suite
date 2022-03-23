@@ -27,12 +27,13 @@ run-all-parsers() (
 
   for parser; do
     (
-      timeout 2 \
+      timeout 5 \
       "$parser" \
         < "$tmp-input.yaml" \
         > "$tmp-$parser.stdout" \
-        2> "$tmp-$parser.stderr" ||
-        touch "$tmp-$parser.err"
+        2> "$tmp-$parser.stderr" || (
+          echo $? > "$tmp-$parser.err"
+        )
     ) &
   done
 
@@ -65,12 +66,13 @@ write-tsv-line() (
     fi
 
     if [[ $parser == *-rustyaml ]]; then
-      got=$(adjust-tags-for-rust <<<"$got")
-      want=$(adjust-for-rust <<<"$want")
-      if [[ $got == *\&1* ]]; then
-        want=$(anchors-for-rust <<<"$want")
-      fi
-      # echo ">>>$want<<<"
+      got=$(adjust-got-for-rust <<<"$got")
+      want=$(adjust-want-for-rust <<<"$want")
+    fi
+
+    if [[ $parser == *-rapid ]]; then
+      got=$(adjust-got-for-rapid <<<"$got")
+      want=$(adjust-want-for-rapid <<<"$want")
     fi
 
     if [[ $parser == *-refhs ]]; then
@@ -108,7 +110,7 @@ write-tsv-line() (
   printf '%s' "$out"
 )
 
-adjust-tags-for-rust() {
+adjust-got-for-rust() {
   perl -p0e '
     s/<Tag\("!!",\ "(.*?)"\)>/<tag:yaml.org,2002:$1>/g;
     s/<Tag\("!",\ "(.*?)"\)>/<!$1>/g;
@@ -118,24 +120,31 @@ adjust-tags-for-rust() {
   '
 }
 
-adjust-for-rust() {
+adjust-want-for-rust() {
   perl -p0e '
     s/^\+DOC ---$/+DOC/gm;
     s/^-DOC \.\.\.$/-DOC/gm;
     s/^=VAL :$/=VAL :~/gm;
     s/^\+MAP\ \{\}(\ ?)/+MAP$1/gm;
     s/^\+SEQ\ \[\](\ ?)/+SEQ$1/gm;
+
+    my ($c, %a) = (1);
+    s{^(\+MAP|\+SEQ|=VAL|=ALI) (&|\*)(\S+)(.*)}
+     {"$1 $2".($2 eq "&" ? ($a{$3} = $c++) : $a{$3}).$4}gem;
   '
 }
 
-anchors-for-rust() {
+adjust-got-for-rapid() {
   perl -p0e '
-    my $i = 1;
-    while (/\&([a-zA-Z]\S*)/) {
-      my $anchor = $1;
-      s/([\&\*])$anchor/$1$i/g;
-      $i++;
-    }
+    s/^\+DOC ---/+DOC/gm;
+  '
+}
+
+adjust-want-for-rapid() {
+  perl -p0e '
+    s/^=VAL ((?:&\S+ |<\S*> )*)[">|]/=VAL $1'"'"'/gm;
+    s/^\+DOC ---/+DOC/gm;
+    s/^-DOC \.\.\./-DOC/gm;
   '
 }
 
